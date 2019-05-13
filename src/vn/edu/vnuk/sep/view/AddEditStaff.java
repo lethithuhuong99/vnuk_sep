@@ -3,6 +3,7 @@ package vn.edu.vnuk.sep.view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -13,6 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import vn.edu.vnuk.sep.view.define.Define;
+import vn.edu.vnuk.sep.view.model.Lecturer;
+import vn.edu.vnuk.sep.view.model.Staff;
+
 @SuppressWarnings("serial")
 public class AddEditStaff extends JFrame {
 
@@ -20,12 +25,14 @@ public class AddEditStaff extends JFrame {
 	private JTextField textFieldId;
 	private JTextField textFieldName;
 	private JTextField textFieldYearOfBirth;
-	private JTextField textFieldHomnetown;
+	private JTextField textFieldHometown;
 	private JTextField textFieldDepartment;
 	private JTextField textFieldAllowance;
 	private JTextField textFieldWorkDays;
 	private JTextField textFieldSalaryRatio;
 	private JTextField textFieldYearsOfWork;
+	private JComboBox comboBoxPosition;
+	private ArrayList<Staff> staffs = new ArrayList<Staff>();
 
 	/**
 	 * Launch the application.
@@ -110,10 +117,10 @@ public class AddEditStaff extends JFrame {
 		contentPane.add(textFieldYearOfBirth);
 		textFieldYearOfBirth.setColumns(10);
 		
-		textFieldHomnetown = new JTextField();
-		textFieldHomnetown.setBounds(200, 120, 213, 20);
-		contentPane.add(textFieldHomnetown);
-		textFieldHomnetown.setColumns(10);
+		textFieldHometown = new JTextField();
+		textFieldHometown.setBounds(200, 120, 213, 20);
+		contentPane.add(textFieldHometown);
+		textFieldHometown.setColumns(10);
 		
 		textFieldDepartment = new JTextField();
 		textFieldDepartment.setBounds(200, 150, 213, 20);
@@ -140,14 +147,51 @@ public class AddEditStaff extends JFrame {
 		contentPane.add(textFieldYearsOfWork);
 		textFieldYearsOfWork.setColumns(10);
 		
-		JComboBox comboBoxPosition = new JComboBox();
+		comboBoxPosition = new JComboBox();
 		comboBoxPosition.setModel(new DefaultComboBoxModel(new String[] {"Chief", "Debuty", "Employee"}));
 		comboBoxPosition.setBounds(200, 180, 213, 20);
 		contentPane.add(comboBoxPosition);
 		
 		JButton btnAdd = new JButton("Submit");
 		btnAdd.setBounds(50, 343, 363, 23);
+		btnAdd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				addStaff();
+			}
+		});
 		contentPane.add(btnAdd);
 	}
 
+	public void addStaff() {
+				
+		int id = Integer.parseInt(textFieldId.getText().toString());
+		String name = textFieldName.getText().toString();
+		int yearOfBirth = Integer.parseInt(textFieldYearOfBirth.getText().toString());
+		String hometown = textFieldHometown.getText().toString();
+		String department = textFieldDepartment.getText().toString();
+		String position = comboBoxPosition.getSelectedItem().toString();
+		int allowance = Integer.parseInt(textFieldAllowance.getText().toString());
+		int workDays = Integer.parseInt(textFieldWorkDays.getText().toString());
+		float salaryRatio = Float.parseFloat(textFieldSalaryRatio.getText().toString());
+		int yearOfWork = Integer.parseInt(textFieldYearsOfWork.getText().toString());
+		
+		Staff staff = new Staff.StaffBuilder(Define.latestId, Define.TYPE_OF_LECTURER)
+				.setName(name)
+				.setYearOfBirth(yearOfBirth)
+				.setHometown(hometown)
+				.setDepartment(department)
+				.setWorkDay(workDays)
+				.setAllowance(allowance)
+				.setPosition(position)
+				.setSalaryRatio(salaryRatio)
+				.setYearOfWork(yearOfWork)
+				.build();
+		
+		Define.persons.add(staff);
+		staffs.add(staff);
+		
+		System.out.println(id + " " + name + " " + yearOfBirth + " " + hometown + " " + department + " " + workDays + " " + allowance + " " + position + " " + salaryRatio + " " + yearOfWork);
+		
+	}
 }

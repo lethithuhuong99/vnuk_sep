@@ -149,13 +149,19 @@ public class AddEditLecturer extends JFrame {
 		contentPane.add(textFieldYearOfWork);
 		textFieldYearOfWork.setColumns(10);
 		
-		JComboBox comboBoxQualification = new JComboBox();
+		comboBoxQualification = new JComboBox();
 		comboBoxQualification.setModel(new DefaultComboBoxModel(new String[] {"Bachelor", "Master", "Doctor"}));
 		comboBoxQualification.setBounds(200, 180, 213, 20);
 		contentPane.add(comboBoxQualification);
 		
 		JButton btnAdd = new JButton("Submit");
 		btnAdd.setBounds(50, 343, 363, 23);
+		btnAdd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				addLecturer();
+			}
+		});
 		contentPane.add(btnAdd);
 	}
 	
@@ -185,6 +191,8 @@ public class AddEditLecturer extends JFrame {
 		
 		Define.persons.add(lecturer);
 		lecturers.add(lecturer);
+		
+		System.out.println(id + " " + name + " " + yearOfBirth + " " + hometown + " " + department + " " + qualification + " " + allowance + " " + periodsInMonth + " " + salaryRatio + " " + yearOfWork);
 		
 	}
 }
