@@ -3,6 +3,7 @@ package vn.edu.vnuk.sep.view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -12,6 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import vn.edu.vnuk.sep.view.define.Define;
+import vn.edu.vnuk.sep.view.model.CasualWorker;
+import vn.edu.vnuk.sep.view.model.Lecturer;
 
 @SuppressWarnings("serial")
 public class AddEditLecturer extends JFrame {
@@ -26,6 +31,9 @@ public class AddEditLecturer extends JFrame {
 	private JTextField textFieldPeriodsInMonth;
 	private JTextField textFieldSalaryRatio;
 	private JTextField textFieldYearOfWork;
+	private JComboBox comboBoxQualification;
+	private ArrayList<Lecturer> lecturers = new ArrayList<Lecturer>();
+
 
 	/**
 	 * Launch the application.
@@ -149,5 +157,34 @@ public class AddEditLecturer extends JFrame {
 		JButton btnAdd = new JButton("Submit");
 		btnAdd.setBounds(50, 343, 363, 23);
 		contentPane.add(btnAdd);
+	}
+	
+	public void addLecturer() {
+		int id = Integer.parseInt(textFieldId.getText().toString());
+		String name = textFieldName.getText().toString();
+		int yearOfBirth = Integer.parseInt(textFieldYearOfBirth.getText().toString());
+		String hometown = textFieldHometown.getText().toString();
+		String department = textFieldDepartment.getText().toString();
+		String qualification = comboBoxQualification.getSelectedItem().toString();
+		int allowance = Integer.parseInt(textFieldAllowance.getText().toString());
+		int periodsInMonth = Integer.parseInt(textFieldPeriodsInMonth.getText().toString());
+		float salaryRatio = Float.parseFloat(textFieldSalaryRatio.getText().toString());
+		int yearOfWork = Integer.parseInt(textFieldYearOfWork.getText().toString());
+		
+		Lecturer lecturer = new Lecturer.LecturerBuilder(Define.latestId, Define.TYPE_OF_LECTURER)
+				.setName(name)
+				.setYearOfBirth(yearOfBirth)
+				.setHometown(hometown)
+				.setDepartment(department)
+				.setQualification(qualification)
+				.setAllowance(allowance)
+				.setPeriodsInMonth(periodsInMonth)
+				.setSalaryRatio(salaryRatio)
+				.setYearOfWork(yearOfWork)
+				.build();
+		
+		Define.persons.add(lecturer);
+		lecturers.add(lecturer);
+		
 	}
 }
