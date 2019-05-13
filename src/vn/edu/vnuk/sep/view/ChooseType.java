@@ -34,7 +34,7 @@ public class ChooseType extends JFrame {
 	 */
 	public ChooseType() {
 		setTitle("Choose type of employee");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,16 +52,6 @@ public class ChooseType extends JFrame {
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Casual Worker");
 		rdbtnNewRadioButton_2.setBounds(155, 99, 109, 23);
 		contentPane.add(rdbtnNewRadioButton_2);
-		
-		JButton btnClose = new JButton("Close");
-		btnClose.setBounds(124, 175, 89, 23);
-		btnClose.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-			}
-		});
-		contentPane.add(btnClose);
 		
 		JButton btnNewButton_1 = new JButton("Next");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -84,7 +74,7 @@ public class ChooseType extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(223, 175, 89, 23);
+		btnNewButton_1.setBounds(155, 175, 89, 23);
 		contentPane.add(btnNewButton_1);
 	}
 }

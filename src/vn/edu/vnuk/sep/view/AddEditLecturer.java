@@ -46,6 +46,7 @@ public class AddEditLecturer extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	public AddEditLecturer() {
 		setTitle("Add/Edit Lecturer's Information");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -146,7 +147,7 @@ public class AddEditLecturer extends JFrame {
 		contentPane.add(comboBox);
 		
 		JButton btnAdd = new JButton("Submit");
-		btnAdd.setBounds(267, 343, 72, 23);
+		btnAdd.setBounds(50, 343, 363, 23);
 		contentPane.add(btnAdd);
 	}
 }

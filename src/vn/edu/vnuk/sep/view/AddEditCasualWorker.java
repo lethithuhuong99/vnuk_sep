@@ -99,7 +99,7 @@ public class AddEditCasualWorker extends JFrame {
 		textFieldPrice.setColumns(10);
 				
 		JButton btnAdd = new JButton("Submit");
-		btnAdd.setBounds(273, 194, 66, 23);
+		btnAdd.setBounds(50, 194, 363, 23);
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

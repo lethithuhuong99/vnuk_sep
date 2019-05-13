@@ -1,5 +1,6 @@
 package vn.edu.vnuk.sep.view;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -53,7 +55,7 @@ public class Homepage extends JFrame {
 	 */
 	public Homepage() {
 		setTitle("Employee Management System");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 850, 600);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -118,23 +120,28 @@ public class Homepage extends JFrame {
 		btnNewButton.setBounds(695, 50, 107, 30);
 		contentPane.add(btnNewButton);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(43, 114, 759, 358);
+		contentPane.add(scrollPane);
 		//TABLE
 		
 		
 			//Column names
-				String[] columns ={ "ID", "Name", "YearOfBirth", "Hometown", "Department" }; 
+				String[] columns ={"ID", "Name", "YearOfBirth", "Hometown", "Department"}; 
 				
-				DefaultTableModel dtm = new DefaultTableModel(columns, 0);
-		
-				table = new JTable(dtm);
+			//Data
+				Object[][] data = {
+						{"A", "B", "C", "D", "E"},
+				};
 				
-				String[] item= {"A", "B", "C", "D", "E"};
-				dtm.addRow(item);
 				
-		
+		table = new JTable(data, columns);
+		scrollPane.setViewportView(table);
+		table.setFillsViewportHeight(true);
+		table.setPreferredScrollableViewportSize(new Dimension(500,70));
 		table.setBackground(Color.WHITE);
 		table.setBounds(45, 114, 757, 358);
-		contentPane.add(table);
+		table.setEnabled(true);
 		
 		JButton btnFilter = new JButton("Filter");
 		btnFilter.addActionListener(new ActionListener() {
@@ -183,6 +190,8 @@ public class Homepage extends JFrame {
 		JCheckBox chckbxWorker = new JCheckBox("Worker");
 		chckbxWorker.setBounds(455, 503, 81, 23);
 		contentPane.add(chckbxWorker);
+		
+		
 	}
 	
 	public static void addNewPerson(ArrayList<Person> persons) {

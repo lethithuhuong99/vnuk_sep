@@ -146,7 +146,7 @@ public class AddEditStaff extends JFrame {
 		contentPane.add(comboBox);
 		
 		JButton btnAdd = new JButton("Submit");
-		btnAdd.setBounds(267, 343, 72, 23);
+		btnAdd.setBounds(50, 343, 363, 23);
 		contentPane.add(btnAdd);
 	}
 
