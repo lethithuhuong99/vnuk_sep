@@ -3,6 +3,8 @@ package vn.edu.vnuk.sep.view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,15 +13,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import vn.edu.vnuk.sep.view.define.Define;
+import vn.edu.vnuk.sep.view.model.CasualWorker;
+
 @SuppressWarnings("serial")
 public class AddEditCasualWorker extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField textFieldId;
+	private JTextField textFieldName;
+	private JTextField textFieldYearOfBirth;
+	private JTextField textFieldWorkDays;
+	private JTextField textFieldPrice;
+	private ArrayList<CasualWorker> casualWorkers = new ArrayList<CasualWorker>();
 
 
 	public static void main(String[] args) {
@@ -67,47 +73,62 @@ public class AddEditCasualWorker extends JFrame {
 		lblDepartment.setBounds(50, 150, 92, 14);
 		contentPane.add(lblDepartment);
 		
-		textField = new JTextField();
-		textField.setBounds(200, 30, 213, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textFieldId = new JTextField();
+		textFieldId.setBounds(200, 30, 213, 20);
+		contentPane.add(textFieldId);
+		textFieldId.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(200, 60, 213, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textFieldName = new JTextField();
+		textFieldName.setBounds(200, 60, 213, 20);
+		contentPane.add(textFieldName);
+		textFieldName.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(200, 90, 213, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		textFieldYearOfBirth = new JTextField();
+		textFieldYearOfBirth.setBounds(200, 90, 213, 20);
+		contentPane.add(textFieldYearOfBirth);
+		textFieldYearOfBirth.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(200, 120, 213, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		textFieldWorkDays = new JTextField();
+		textFieldWorkDays.setBounds(200, 120, 213, 20);
+		contentPane.add(textFieldWorkDays);
+		textFieldWorkDays.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(200, 150, 213, 20);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		textFieldPrice = new JTextField();
+		textFieldPrice.setBounds(200, 150, 213, 20);
+		contentPane.add(textFieldPrice);
+		textFieldPrice.setColumns(10);
 				
-		JButton btnAdd = new JButton("Add");
-		btnAdd.setBounds(200, 210, 60, 23);
-		contentPane.add(btnAdd);
-		
-		JButton btnEdit = new JButton("Edit");
-		btnEdit.setBounds(270, 210, 60, 23);
-		contentPane.add(btnEdit);
-		
-		JButton btnClose = new JButton("Close");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 System.exit(0);
+		JButton btnAdd = new JButton("Submit");
+		btnAdd.setBounds(273, 194, 66, 23);
+		btnAdd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				addCasualWorker();
 			}
 		});
-		btnClose.setBounds(340, 210, 73, 23);
-		contentPane.add(btnClose);
+		contentPane.add(btnAdd);
 	}
+	
+	public void addCasualWorker() {
+		int id = Integer.parseInt(textFieldId.getText().toString());
+		String name = textFieldName.getText().toString();
+		int yearOfBirth = Integer.parseInt(textFieldYearOfBirth.getText().toString());
+		int workDays = Integer.parseInt(textFieldWorkDays.getText().toString());
+		float price = Float.parseFloat(textFieldPrice.getText().toString());
+		
+		CasualWorker casualWorker = new CasualWorker.CasualWorkerBuilder(Define.latestId, Define.TYPE_OF_CASUAL_WORKER)
+				.setName(name)
+				.setYearOfBirth(yearOfBirth)
+				.setWorkDay(workDays)
+				.setEarningPerDay(price)
+				.build();
+		
+		Define.persons.add(casualWorker);
+		casualWorkers.add(casualWorker);
+		
+		System.out.println(id + " " + name + " " + yearOfBirth + " " + workDays + " " + price);
+		
+	}
+	
 
 }

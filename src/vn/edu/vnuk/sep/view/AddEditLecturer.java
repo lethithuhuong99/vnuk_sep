@@ -145,21 +145,8 @@ public class AddEditLecturer extends JFrame {
 		comboBox.setBounds(200, 180, 213, 20);
 		contentPane.add(comboBox);
 		
-		JButton btnAdd = new JButton("Add");
-		btnAdd.setBounds(200, 343, 60, 23);
+		JButton btnAdd = new JButton("Submit");
+		btnAdd.setBounds(267, 343, 72, 23);
 		contentPane.add(btnAdd);
-		
-		JButton btnEdit = new JButton("Edit");
-		btnEdit.setBounds(270, 343, 60, 23);
-		contentPane.add(btnEdit);
-		
-		JButton btnClose = new JButton("Close");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 System.exit(0);
-			}
-		});
-		btnClose.setBounds(340, 343, 73, 23);
-		contentPane.add(btnClose);
 	}
 }

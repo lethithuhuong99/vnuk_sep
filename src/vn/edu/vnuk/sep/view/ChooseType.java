@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 public class ChooseType extends JFrame {
 
 	private JPanel contentPane;
-
+	private static ChooseType frame = new ChooseType();
 	/**
 	 * Launch the application.
 	 */
@@ -21,7 +21,6 @@ public class ChooseType extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ChooseType frame = new ChooseType();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,9 +53,15 @@ public class ChooseType extends JFrame {
 		rdbtnNewRadioButton_2.setBounds(155, 99, 109, 23);
 		contentPane.add(rdbtnNewRadioButton_2);
 		
-		JButton btnNewButton = new JButton("Close");
-		btnNewButton.setBounds(124, 175, 89, 23);
-		contentPane.add(btnNewButton);
+		JButton btnClose = new JButton("Close");
+		btnClose.setBounds(124, 175, 89, 23);
+		btnClose.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		contentPane.add(btnClose);
 		
 		JButton btnNewButton_1 = new JButton("Next");
 		btnNewButton_1.addActionListener(new ActionListener() {

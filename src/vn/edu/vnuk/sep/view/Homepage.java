@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -15,6 +16,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import vn.edu.vnuk.sep.view.define.Define;
+import vn.edu.vnuk.sep.view.model.CasualWorker;
+import vn.edu.vnuk.sep.view.model.Person;
 
 @SuppressWarnings("serial")
 public class Homepage extends JFrame {
@@ -22,6 +28,7 @@ public class Homepage extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	private JTable table;
+	private static ArrayList<String> newItem = new ArrayList<String>();
 
 	/**
 	 * Launch the application.
@@ -36,6 +43,8 @@ public class Homepage extends JFrame {
 					e.printStackTrace();
 				}
 			}
+			
+			
 		});
 	}
 
@@ -77,9 +86,6 @@ public class Homepage extends JFrame {
 		JMenuItem mntmShowSalary = new JMenuItem("Show salary");
 		mnShow.add(mntmShowSalary);
 		
-		JMenuItem mntmSearch = new JMenuItem("Search");
-		mnFile.add(mntmSearch);
-		
 		JMenu mnTool = new JMenu("Tool");
 		menuBar.add(mnTool);
 		
@@ -114,28 +120,30 @@ public class Homepage extends JFrame {
 		
 		//TABLE
 		
+		
 			//Column names
-				String[] column = { "ID", "Name", "YearOfBirth", "Hometown", "Department" }; 
-			//Data to be displayed in the table
-				String[][] data = { 
-			            { "1", "Kundan Kumar Jha", "1999", "Danang", "CSE" }, 
-			            { "2", "Kundan Kumar Jha", "1999", "Danang", "CSE" }, 
-			        }; 
+				String[] columns ={ "ID", "Name", "YearOfBirth", "Hometown", "Department" }; 
+				
+				DefaultTableModel dtm = new DefaultTableModel(columns, 0);
+		
+				table = new JTable(dtm);
+				
+				String[] item= {"A", "B", "C", "D", "E"};
+				dtm.addRow(item);
 				
 		
-		table = new JTable(data, column);
 		table.setBackground(Color.WHITE);
 		table.setBounds(45, 114, 757, 358);
 		contentPane.add(table);
 		
-		JButton button = new JButton("Search");
-		button.addActionListener(new ActionListener() {
+		JButton btnFilter = new JButton("Filter");
+		btnFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
-		button.setBounds(722, 499, 80, 30);
-		contentPane.add(button);
+		btnFilter.setBounds(722, 499, 80, 30);
+		contentPane.add(btnFilter);
 		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
@@ -175,10 +183,16 @@ public class Homepage extends JFrame {
 		JCheckBox chckbxWorker = new JCheckBox("Worker");
 		chckbxWorker.setBounds(455, 503, 81, 23);
 		contentPane.add(chckbxWorker);
+	}
+	
+	public static void addNewPerson(ArrayList<Person> persons) {
+		int id = ((CasualWorker)persons.get(Define.latestId)).getId();
+		String name = ((CasualWorker)persons.get(Define.latestId)).getName();
+		int yearOfBirth = ((CasualWorker)persons.get(Define.latestId)).getYearOfBirth();
+		int workDays = ((CasualWorker)persons.get(Define.latestId)).getWorkDay();
+		float price = ((CasualWorker)persons.get(Define.latestId)).getEarningPerDay();
 		
-		
-		
-		
+		System.out.println(id + " " + " " + name + " " + yearOfBirth + " " + workDays + " " + price);
 		
 	}
 }
